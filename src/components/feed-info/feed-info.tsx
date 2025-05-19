@@ -1,28 +1,43 @@
-import { FC } from 'react';
-
+import { FC, useMemo } from 'react';
 import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
+import { useSelector } from '@store';
+import { getOrderFeedState } from '../../services/slices/feedSlice/feedSlice';
 
-const getOrders = (orders: TOrder[], status: string): number[] =>
-  orders
-    .filter((item) => item.status === status)
-    .map((item) => item.number)
-    .slice(0, 20);
+const FeedInfo: FC = () => {
+  const { orderList, totalOrders, todayOrders } =
+    useSelector(getOrderFeedState);
 
-export const FeedInfo: FC = () => {
-  /** TODO: взять переменные из стора */
-  const orders: TOrder[] = [];
-  const feed = {};
+  const processOrders = useMemo(() => {
+    const orderProcessor = (status: string): number[] =>
+      orderList
+        .filter((order) => order.status === status)
+        .map((order) => order.number)
+        .slice(0, 20);
 
-  const readyOrders = getOrders(orders, 'done');
+    return {
+      ready: orderProcessor('done'),
+      pending: orderProcessor('pending')
+    };
+  }, [orderList]);
 
-  const pendingOrders = getOrders(orders, 'pending');
+  const feedData = useMemo(
+    () => ({
+      orders: orderList,
+      total: totalOrders,
+      totalToday: todayOrders
+    }),
+    [orderList, totalOrders, todayOrders]
+  );
 
   return (
     <FeedInfoUI
-      readyOrders={readyOrders}
-      pendingOrders={pendingOrders}
-      feed={feed}
+      readyOrders={processOrders.ready}
+      pendingOrders={processOrders.pending}
+      feed={feedData}
     />
   );
 };
+
+FeedInfo.displayName = 'FeedInfo';
+export { FeedInfo };
