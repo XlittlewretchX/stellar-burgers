@@ -1,61 +1,75 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from '@store';
+import {
+  fetchUserProfile,
+  getProfileState,
+  updateUserProfile
+} from '../../services/slices/userSlice/userSlice';
+import { Preloader } from '@ui';
 
-export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
+const UserProfileContainer: FC = () => {
+  const profileState = useSelector(getProfileState);
+  const dispatch = useDispatch();
+
+  const defaultUserData = {
+    name: profileState.profileData?.name || '',
+    email: profileState.profileData?.email || '',
+    password: ''
   };
 
-  const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
-    password: ''
-  });
+  const [userForm, setUserForm] = useState(defaultUserData);
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
+    const { name, email } = profileState.profileData || {};
+    setUserForm((prev) => ({
+      ...prev,
+      name: name || '',
+      email: email || ''
     }));
-  }, [user]);
+  }, [profileState.profileData]);
 
-  const isFormChanged =
-    formValue.name !== user?.name ||
-    formValue.email !== user?.email ||
-    !!formValue.password;
-
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
+  const hasChanges = () => {
+    const { name, email } = profileState.profileData || {};
+    return (
+      userForm.name !== name ||
+      userForm.email !== email ||
+      userForm.password !== ''
+    );
   };
 
-  const handleCancel = (e: SyntheticEvent) => {
+  const resetForm = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    setUserForm(defaultUserData);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
+  const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserForm((prev) => ({
+      ...prev,
+      [name]: value
     }));
   };
+
+  const saveChanges = (e: SyntheticEvent) => {
+    e.preventDefault();
+    dispatch(updateUserProfile(userForm));
+    dispatch(fetchUserProfile());
+  };
+
+  if (profileState.isLoading) {
+    return <Preloader />;
+  }
 
   return (
     <ProfileUI
-      formValue={formValue}
-      isFormChanged={isFormChanged}
-      handleCancel={handleCancel}
-      handleSubmit={handleSubmit}
-      handleInputChange={handleInputChange}
+      formValue={userForm}
+      isFormChanged={hasChanges()}
+      handleCancel={resetForm}
+      handleSubmit={saveChanges}
+      handleInputChange={updateForm}
     />
   );
-
-  return null;
 };
+
+export const Profile = UserProfileContainer;
