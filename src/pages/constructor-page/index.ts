@@ -1,1 +1,3 @@
-export { ConstructorPage } from './constructor-page';
+import ConstructorPage from './constructor-page';
+
+export { ConstructorPage };
