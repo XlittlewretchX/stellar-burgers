@@ -1,9 +1,14 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
 .link {
   display: block;
   width: 100%;
   text-decoration: none;
-  display: block;
   color: #8585ad;
+  padding: 16px 0;
 }
 
 .link_active {
@@ -13,11 +18,55 @@
 .button {
   text-decoration: none;
   display: block;
+  width: 100%;
+  text-align: left;
   color: #8585ad;
   background-color: unset;
   border: none;
+  padding: 16px 0;
 }
 
 .button:hover {
   cursor: pointer;
+}
+
+.hint {
+  margin-top: 80px;
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+  }
+
+  .link,
+  .button {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(133, 133, 173, 0.35);
+    text-align: center;
+    background-color: rgba(28, 28, 33, 0.45);
+  }
+
+  .link_active {
+    border-color: rgba(76, 76, 255, 0.8);
+    background-color: rgba(76, 76, 255, 0.22);
+  }
+
+  .hint {
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    grid-template-columns: 1fr;
+  }
 }

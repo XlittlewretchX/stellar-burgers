@@ -2,8 +2,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
+  padding: 0 20px 20px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -16,6 +19,182 @@
 .main {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   height: 100%;
   overflow: hidden;
+}
+
+.constructorToggle,
+.constructorBackdrop,
+.constructorDrawer,
+.mobileOrderPanel {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .containerMain {
+    max-width: 100%;
+    overflow: visible;
+    padding: 0 16px 16px;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+    padding-bottom: 86px;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+
+  .mobileOrderPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(76, 76, 255, 0.28);
+    background: rgba(28, 28, 33, 0.75);
+  }
+
+  .mobileOrderPrice {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .mobileOrderPriceValue {
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .mobileOrderButton {
+    flex-shrink: 0;
+  }
+
+  .constructorToggle {
+    display: inline-flex;
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 130;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #4c4cff 0%, #801ab3 100%);
+    color: #f2f2f3;
+    font-family: 'Jet Brains Mono', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    padding: 14px 18px;
+    cursor: pointer;
+  }
+
+  .constructorBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+
+  .constructorDrawer {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 82vh;
+    background-color: #131316;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top: 1px solid rgba(76, 76, 255, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(100% + 24px));
+    transition:
+      transform 0.22s ease,
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+    z-index: 125;
+    overflow-y: auto;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .constructorDrawerOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .constructorDrawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    padding: 4px 4px 0;
+  }
+
+  .constructorDrawerSwipe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0 8px;
+    touch-action: none;
+  }
+
+  .constructorDrawerSwipeLine {
+    width: 56px;
+    height: 4px;
+    border-radius: 999px;
+    background-color: rgba(133, 133, 173, 0.8);
+  }
+
+  .constructorDrawerClose {
+    border: none;
+    background: transparent;
+    color: #4c4cff;
+    font-family: 'Jet Brains Mono', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 768px) {
+  .containerMain {
+    padding: 0 12px 12px;
+  }
+
+  .main {
+    gap: 20px;
+  }
+
+  .constructorToggle {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+
+  .mobileOrderPanel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mobileOrderPrice {
+    justify-content: center;
+  }
+
+  .mobileOrderButton :global(button) {
+    width: 100%;
+  }
 }

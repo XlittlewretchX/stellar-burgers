@@ -2,8 +2,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
+  padding: 0 20px 20px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -16,6 +19,35 @@
 .main {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   height: 100%;
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .containerMain {
+    max-width: 100%;
+    overflow: visible;
+    padding: 0 16px 16px;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .containerMain {
+    padding: 0 12px 12px;
+  }
+
+  .main {
+    gap: 20px;
+  }
 }

@@ -1,7 +1,9 @@
 .burger_ingredients {
   font-family: 'Jet Brains Mono';
   color: #f2f2f3;
+  width: 100%;
   max-width: 600px;
+  min-width: 0;
 
   display: flex;
   flex-direction: column;
@@ -16,15 +18,27 @@ p {
 }
 
 .content {
-  overflow-y: scroll;
+  overflow-y: auto;
+  max-height: calc(100vh - 340px);
 }
 
 .menu {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: center;
+  width: 100%;
+}
+
+.menu :global(.tab) {
+  min-width: 0;
+  width: 100%;
+}
+
+.menu :global(.tab span) {
+  white-space: nowrap;
 }
 
 .categories {
@@ -32,4 +46,39 @@ p {
   font-weight: bold;
   font-size: 24px;
   line-height: 30px;
+}
+
+@media (max-width: 1024px) {
+  .burger_ingredients {
+    max-width: none;
+  }
+
+  .content {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu :global(.tab) {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .categories {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu :global(.tab) {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .menu :global(.tab span) {
+    font-size: 14px;
+  }
+
 }

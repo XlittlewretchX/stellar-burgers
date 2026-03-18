@@ -20,7 +20,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
 }) => (
   <section className={styles.burger_constructor}>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mb-4 mr-4`}>
+      <div className={`${styles.element} mb-4`}>
         <ConstructorElement
           type='top'
           isLocked
@@ -31,7 +31,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </div>
     ) : (
       <div
-        className={`${styles.noBuns} ${styles.noBunsTop} ml-8 mb-4 mr-5 text text_type_main-default`}
+        className={`${styles.noBuns} ${styles.noBunsTop} mb-4 text text_type_main-default`}
       >
         Выберите булки
       </div>
@@ -49,15 +49,13 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           )
         )
       ) : (
-        <div
-          className={`${styles.noBuns} ml-8 mb-4 mr-5 text text_type_main-default`}
-        >
+        <div className={`${styles.noBuns} mb-4 text text_type_main-default`}>
           Выберите начинку
         </div>
       )}
     </ul>
     {constructorItems.bun ? (
-      <div className={`${styles.element} mt-4 mr-4`}>
+      <div className={`${styles.element} mt-4`}>
         <ConstructorElement
           type='bottom'
           isLocked
@@ -68,13 +66,13 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </div>
     ) : (
       <div
-        className={`${styles.noBuns} ${styles.noBunsBottom} ml-8 mb-4 mr-5 text text_type_main-default`}
+        className={`${styles.noBuns} ${styles.noBunsBottom} mb-4 text text_type_main-default`}
       >
         Выберите булки
       </div>
     )}
-    <div className={`${styles.total} mt-10 mr-4`}>
-      <div className={`${styles.cost} mr-10`}>
+    <div className={`${styles.total} mt-10`}>
+      <div className={styles.cost}>
         <p className={`text ${styles.text} mr-2`}>{price}</p>
         <CurrencyIcon type='primary' />
       </div>

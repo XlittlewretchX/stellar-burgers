@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
   max-width: 1240px;
+  padding: 0 20px 20px;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
 }
@@ -11,24 +14,66 @@
   width: 100%;
   max-width: 1240px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .main {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   height: 100%;
-  width: 1240px;
+  width: 100%;
   overflow: hidden;
 }
 
 .columnOrders {
+  max-width: 100%;
   width: 608px;
 }
 
 .columnInfo {
   overflow-y: auto;
   overflow-x: hidden;
+  max-width: 100%;
   width: 580px;
+}
+
+@media (max-width: 1024px) {
+  .containerMain {
+    max-width: 100%;
+    padding: 0 16px 16px;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .columnOrders,
+  .columnInfo {
+    width: 100%;
+  }
+
+  .columnInfo {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .containerMain {
+    padding: 0 12px 12px;
+  }
+
+  .titleBox {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .title {
+    width: 100%;
+  }
 }

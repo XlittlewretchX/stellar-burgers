@@ -35,6 +35,7 @@
 
 .question {
   color: #8585ad;
+  text-align: center;
 }
 
 .link {
@@ -45,4 +46,29 @@
 .error {
   color: #ff0000;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    flex-direction: column;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .wrapCenter {
+    width: 100%;
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px 12px;
+  }
+
+  .wrapCenter {
+    max-width: none;
+  }
 }

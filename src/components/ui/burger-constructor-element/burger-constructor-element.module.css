@@ -1,7 +1,8 @@
 .element {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: stretch;
+  width: 100%;
 }
 
 .element:last-child {
@@ -12,5 +13,58 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 536px;
+  max-width: none;
+  min-width: 0;
+}
+
+.element :global(.move_button_container) {
+  flex-shrink: 0;
+}
+
+.element :global(.constructor-element) {
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .element {
+    gap: 8px;
+    margin-right: 0 !important;
+  }
+
+  .element :global(.constructor-element) {
+    padding: 12px 14px;
+    min-height: 64px;
+  }
+
+  .element :global(.constructor-element__image) {
+    width: 56px;
+    height: 28px;
+    margin-right: 10px;
+  }
+
+  .element :global(.constructor-element__text) {
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .element :global(.constructor-element__price) {
+    font-size: 24px;
+    line-height: 20px;
+  }
+
+  .element :global(.constructor-element__action) {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .element :global(.constructor-element) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }

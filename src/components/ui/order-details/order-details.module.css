@@ -12,3 +12,9 @@
 .text {
   color: #8585ad;
 }
+
+@media (max-width: 768px) {
+  .img {
+    margin: 32px 0;
+  }
+}

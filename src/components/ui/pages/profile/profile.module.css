@@ -1,7 +1,37 @@
 .menu {
   width: 320px;
+  flex-shrink: 0;
 }
 
 .form {
   max-width: 480px;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 1024px) {
+  .menu {
+    width: 100%;
+    margin: 8px 0 0 !important;
+    display: block;
+  }
+
+  .menu > * {
+    width: 100%;
+  }
+
+  .form {
+    max-width: none;
+    margin-top: 0 !important;
+  }
+
+  .button {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 }

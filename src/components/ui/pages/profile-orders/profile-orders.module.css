@@ -13,3 +13,34 @@
 .orders {
   width: 100%;
 }
+
+@media (max-width: 1024px) {
+  .main {
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .menu {
+    width: 100%;
+    margin: 8px 0 0 !important;
+    display: block;
+  }
+
+  .menu > * {
+    width: 100%;
+  }
+
+  .orders {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 0 12px 12px;
+  }
+}

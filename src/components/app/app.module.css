@@ -1,7 +1,9 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
+  padding-top: 72px;
   background-color: #131316;
   color: #f2f2f3;
 }
@@ -21,8 +23,32 @@
 
 .detailPageWrap {
   margin: 120px auto;
+  width: min(100%, 1240px);
+  padding: 0 20px;
 }
 
 .detailHeader {
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .detailPageWrap {
+    margin: 72px auto;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-top: 60px;
+  }
+
+  .detailPageWrap {
+    margin: 32px auto 24px;
+    padding: 0 12px;
+  }
+
+  .detailHeader {
+    text-align: left;
+  }
 }

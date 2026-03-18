@@ -1,6 +1,7 @@
 .wrap {
   margin: 0 auto;
-  width: 640px;
+  width: 100%;
+  max-width: 640px;
 }
 .number {
   text-align: center;
@@ -73,4 +74,51 @@
 }
 .total {
   margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    max-width: none;
+  }
+
+  .list {
+    max-height: 260px;
+  }
+
+  .img_wrap {
+    width: 56px;
+    height: 56px;
+  }
+
+  .border {
+    width: 52px;
+    height: 52px;
+  }
+
+  .img {
+    width: 96px;
+    height: 48px;
+    right: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .quantity {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .bottom {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .total {
+    margin-left: 0;
+  }
 }

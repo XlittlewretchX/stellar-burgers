@@ -12,3 +12,16 @@
   align-items: center;
   min-height: 64px;
 }
+
+@media (max-width: 768px) {
+  .center {
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .header {
+    min-height: 48px;
+  }
+}

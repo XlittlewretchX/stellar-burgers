@@ -2,13 +2,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .article {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 100%;
+  max-width: 260px;
   cursor: pointer;
   text-decoration: none;
   color: #ffff;
@@ -25,6 +27,18 @@
 }
 
 .addButton {
-  width: 260px;
+  width: 100%;
+  max-width: 260px;
   justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .article,
+  .addButton {
+    max-width: none;
+  }
+
+  .article {
+    padding: 0 8px;
+  }
 }

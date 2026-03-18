@@ -12,11 +12,7 @@ export const FeedUI: FC<FeedUIProps> = memo(({ orders, handleGetFeeds }) => (
       <h1 className={`${styles.title} text text_type_main-large`}>
         Лента заказов
       </h1>
-      <RefreshButton
-        text='Обновить'
-        onClick={handleGetFeeds}
-        extraClass={'ml-30'}
-      />
+      <RefreshButton text='Обновить' onClick={handleGetFeeds} />
     </div>
     <div className={styles.main}>
       <div className={styles.columnOrders}>

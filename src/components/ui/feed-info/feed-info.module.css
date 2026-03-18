@@ -2,10 +2,11 @@
   display: flex;
   justify-content: left;
   align-items: flex-start;
+  gap: 16px;
 }
 .column {
-  display: inline;
-  min-width: 50%;
+  min-width: 0;
+  width: 50%;
 }
 
 .list {
@@ -31,4 +32,18 @@
 
 .content {
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .list {
+    max-height: none;
+  }
 }
