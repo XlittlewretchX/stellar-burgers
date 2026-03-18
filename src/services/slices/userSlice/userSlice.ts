@@ -39,7 +39,15 @@ export const initialState: TUserState = {
 
 export const registerUser = createAsyncThunk(
   'user/regUser',
-  async (registerData: TRegisterData) => await registerUserApi(registerData)
+  async (registerData: TRegisterData) => {
+    const data = await registerUserApi(registerData);
+    if (!data.success) {
+      return data;
+    }
+    setCookie('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    return data;
+  }
 );
 
 export const loginUser = createAsyncThunk(
@@ -65,10 +73,9 @@ export const updateUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
-  logoutApi().then(() => {
-    localStorage.clear();
-    deleteCookie('accessToken');
-  });
+  await logoutApi();
+  localStorage.removeItem('refreshToken');
+  deleteCookie('accessToken');
 });
 
 export const userSlice = createSlice({
@@ -133,6 +140,7 @@ export const userSlice = createSlice({
         state.isAuthenticated = false;
         state.isAuthChecked = false;
         state.loginUserRequest = false;
+        state.error = (action.error?.message as string) || null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
@@ -150,6 +158,7 @@ export const userSlice = createSlice({
         (state.request = false),
           (state.error = null),
           (state.response = action.payload.user);
+        state.userData = action.payload.user;
       })
       .addCase(logoutUser.pending, (state) => {
         state.isAuthenticated = true;

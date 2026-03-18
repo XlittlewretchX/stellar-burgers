@@ -1,7 +1,7 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { resetPasswordApi } from '@api';
+import { MOCK_RESET_TOKEN_STORAGE_KEY, resetPasswordApi } from '@api';
 import { ResetPasswordUI } from '@ui-pages';
 
 export const ResetPassword: FC = () => {
@@ -26,6 +26,13 @@ export const ResetPassword: FC = () => {
       navigate('/forgot-password', { replace: true });
     }
   }, [navigate]);
+
+  useEffect(() => {
+    const previewToken = localStorage.getItem(MOCK_RESET_TOKEN_STORAGE_KEY);
+    if (previewToken) {
+      setToken(previewToken);
+    }
+  }, []);
 
   return (
     <ResetPasswordUI

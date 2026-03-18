@@ -15,10 +15,20 @@ export const Register: FC = () => {
   const dispatch = useDispatch();
   const error = useSelector(getError);
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(registerUser({ email, password, name: userName }));
-    navigate('/login');
+    if (!email || !password || !userName) {
+      return;
+    }
+
+    try {
+      await dispatch(
+        registerUser({ email, password, name: userName })
+      ).unwrap();
+      navigate('/', { replace: true });
+    } catch {
+      // Ошибка уже сохраняется в store и показывается в форме.
+    }
   };
 
   return (
